@@ -24,8 +24,12 @@ jobs:
             username: _json_key
             password: ((gcloud-service-account-key-file))
         run:
-#          path: ls
-#          args: ['-la','resource-tutorial/tutorials/basic/basic-pipeline/']
-          path: ./resource-tutorial/tutorials/basic/basic-pipeline/gcloudbuild.sh
+          path: /bin/bash
+          args:
+          - -exc
+          - |
+            ./resource-tutorial/tutorials/basic/basic-pipeline/gcloudbuild.sh
+        params:
+          GCLOUD_SERVICE_ACCOUNT_KEY_FILE: ((gcloud-service-account-key-file))
 params:
   GCLOUD_SERVICE_ACCOUNT_KEY_FILE: ((gcloud-service-account-key-file))

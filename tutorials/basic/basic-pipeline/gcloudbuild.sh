@@ -1,6 +1,7 @@
 #!/bin/bash
 env
-cat ${GCLOUD_SERVICE_ACCOUNT_KEY_FILE}
+set -eu
+
 echo "${GCLOUD_SERVICE_ACCOUNT_KEY_FILE}" >> sa.json
 gcloud auth activate-service-account --key-file=sa.json
 cd resource-tutorial/tutorials/miscellaneous/docker-images/docker
