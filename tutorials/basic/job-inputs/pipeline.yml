@@ -5,12 +5,10 @@ resources:
     source:
       uri: https://github.com/starkandwayne/concourse-tutorial.git
       branch: develop
-
   - name: resource-app
     type: git
     source:
       uri: https://github.com/cloudfoundry-community/simple-go-web-app.git
-
 jobs:
   - name: job-test-app
     public: true

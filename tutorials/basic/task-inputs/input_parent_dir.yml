@@ -6,7 +6,7 @@ image_resource:
   source: {repository: busybox}
 
 inputs:
-  - name: task-inputs
+  - name: task-inputs-test
 
 run:
   path: ls

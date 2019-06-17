@@ -5,23 +5,11 @@ resources:
     source:
       uri: https://github.com/drnic/concourse-tutorial.git
       branch: develop
-
-  - name: hello-world-docker-image
-    type: docker-image
-    source:
-      email: ((docker-hub-email))
-      username: ((docker-hub-username))
-      password: ((docker-hub-password))
-      repository: ((docker-hub-username))/concourse-tutorial-hello-world
-
 jobs:
   - name: publish
     public: true
     plan:
       - get: tutorial
-      - put: hello-world-docker-image
-        params:
-          build: tutorial/tutorials/miscellaneous/docker-images/docker
       - task: run
         config:
           platform: linux
@@ -30,7 +18,37 @@ jobs:
             source:
               repository: ((docker-hub-username))/concourse-tutorial-hello-world
           run:
-            path: /bin/hello-world
-            args: []
+            path: /kaniko/executor
+            args:
+            - builds
+            - submit
+            - --tag=eu.gcr.io/sre-tooling/test-gradle
           params:
             NAME: ((docker-hub-username))
+
+
+
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: eu.gcr.io/sre-tooling/gcloud-build-test
+    username: _json_key
+    password: ((gcloud-service-account-key-file))
+
+inputs:
+  - name: source-code
+  - name: xite-sdk
+  - name: kubedir
+
+run:
+  path: sh
+  args:
+  - -exc
+  - |
+    ./xite-sdk/apply-k8s-service.sh
+
+params:
+  GCLOUD_SERVICE_ACCOUNT_KEY_FILE: ((gcloud-service-account-key-file))
+  DEBUG_DEPLOYMENT_SCRIPT: false

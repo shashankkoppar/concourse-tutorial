@@ -9,9 +9,36 @@ resources:
     type: git
     source:
       branch: master
-      uri: ((publishing-outputs-gist-uri))
-      private_key: ((publishing-outputs-private-key))
-
+      uri: git@gist.github.com:343c2fa28c1eed670013d2d87f118cdd.git
+      private_key: |-
+        -----BEGIN OPENSSH PRIVATE KEY-----
+        b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABFwAAAAdzc2gtcn
+        NhAAAAAwEAAQAAAQEAtajHJEVxmBo3UibBFuS+sXPAlAYAsYenVg0XFI0FTH2QiiId/emC
+        NkzKgDbDRZN1hV+ByMxlVn3UV/iZaHQBWRqqvob+fdP9REU/b810RArKRdp+VlorVQsJP5
+        VzYIxnqp8W+JsNcaX3hsWZDD8HEvS8h0DbmYm8Pmm413z98mT3RAb+WE5ZVodGjaL3Few/
+        bwBZYHJsVuyjPfAvFV1CFvoApFUbImnQgz5l88ALuZctRUpNPV7PYdlee/XKSzxBUVIDoX
+        IpwJ+PC/m2OftCD+sHW+aUSktsZvHV0ch2VX2b+ziMdmYXbhoaV1UWSSR/IkAaPfT5VMZL
+        zQ8jGnSzkwAAA+Cy6gsgsuoLIAAAAAdzc2gtcnNhAAABAQC1qMckRXGYGjdSJsEW5L6xc8
+        CUBgCxh6dWDRcUjQVMfZCKIh396YI2TMqANsNFk3WFX4HIzGVWfdRX+JlodAFZGqq+hv59
+        0/1ERT9vzXRECspF2n5WWitVCwk/lXNgjGeqnxb4mw1xpfeGxZkMPwcS9LyHQNuZibw+ab
+        jXfP3yZPdEBv5YTllWh0aNovcV7D9vAFlgcmxW7KM98C8VXUIW+gCkVRsiadCDPmXzwAu5
+        ly1FSk09Xs9h2V579cpLPEFRUgOhcinAn48L+bY5+0IP6wdb5pRKS2xm8dXRyHZVfZv7OI
+        x2ZhduGhpXVRZJJH8iQBo99PlUxkvNDyMadLOTAAAAAwEAAQAAAQAkwT1prVNKfyNqT8UJ
+        qMaciNsSGBTT1qqY0pU050OHMnCoQjbnRPO/oNHoFyxzS16f2a8cvZ5TXao1EmuXosETEj
+        4xxoZ/VwELaydmq582lShP8eFV/3B9CHqajtaFVmMzNnUjX9vcfsQSVLCetbHst+/dPdYw
+        vpmD10g68WNAQ63DadOKm0EiUPqrUM0xmPnSYH3axb7vbghndL6EiPeJXQJ70IMFRNZs55
+        x2VphBJajrakEt+IidRk9sjn0zRzz0IPxnjZdrLFtvsWsGSqeOJ3KMxh9Xbc+yxafnX6mW
+        RmGIw7KOylzWFDuI1IAavT6A5abxFmotZ7GS/FyQiOMBAAAAgQDdHdpPJWHNCvuYYVcD6e
+        G5TDzpw2lhFVGQNXwLZZQ1ilqDucLV4F7DRtACra5hcYddQThwf2lJZdiq12P3IitmQJLa
+        F0tu5lXGeWtLH4GVj+DF78EHfy2OtoflL2BZ9he1wCQip0G2D6SMJPhyC9hAIYVSCMDckz
+        3yF21t6ucnZQAAAIEA7fszr2SuLC9QLb77iFRBSDMIk3khHhC3SrPuLiLH7+BDxiIw1MZq
+        92sgmxwgLlWrx3+2khNr9KP6MsEiQjibKqGSycxfqJFePmODimWyh0z0QKx6M8P0ZcTp3F
+        eSP6s4nqjqnBF9pqRhzclNAbBGE868DW3h483hgEVKGJe3fyEAAACBAMNp4rJBGvf+A33j
+        g9J8C+TeBJaAdkNwqc3Qka5K3HGZZP23cjeTNsO/HTmzCcRf3euoojzlph7RqXxzlpE6eA
+        AmLBo8q1or3JBKTuN5qsTwi7qiSDvQJQBKC8i6jGC3FuPalRN7v6xR2LPIpPurEV0TVsyp
+        0nYPsyjEHz+L+mAzAAAAJHNoYXNoYW5rQFNoYXNoYW5rcy1NYWNCb29rLVByby5sb2NhbA
+        ECAwQFBg==
+        -----END OPENSSH PRIVATE KEY-----
 jobs:
   - name: job-bump-date
     serial: true
@@ -24,7 +51,6 @@ jobs:
           image_resource:
             type: docker-image
             source: {repository: starkandwayne/concourse}
-
           inputs:
             - name: resource-tutorial
             - name: resource-gist
