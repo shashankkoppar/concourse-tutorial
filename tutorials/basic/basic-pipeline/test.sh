@@ -1,10 +1,14 @@
 #!/bin/bash
 
-set -eux
+set -eu
 
-echo "$GCLOUD_SERVICE_ACCOUNT_KEY_FILE" >> sa.json
-gcloud auth activate-service-account --key-file=sa.json
-gcloud builds submit --tag=eu.gcr.io/sre-tooling/hello-world-example
-gcloud container clusters get-credentials tooling --zone europe-west1-d --project sre-tooling
+DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+export fly_target=${fly_target:-tutorial}
+echo "Concourse API target ${fly_target}"
+echo "Tutorial $(basename $DIR)"
 
-kubectl run hello-world --image=eu.gcr.io/sre-tooling/hello-world-example
+pushd $DIR
+  fly -t ${fly_target} set-pipeline -p tutorial-pipeline -c pipeline.yml -n
+  fly -t ${fly_target} unpause-pipeline -p tutorial-pipeline
+  fly -t ${fly_target} trigger-job -w -j tutorial-pipeline/job-hello-world
+popd
