@@ -1,7 +1,5 @@
 #!/bin/bash
 env
-set -eu
-cat /Users/shashank/Downloads/sre-tooling-5add44bce09f.json
 cat ${GCLOUD_SERVICE_ACCOUNT_KEY_FILE}
 echo "${GCLOUD_SERVICE_ACCOUNT_KEY_FILE}" >> sa.json
 gcloud auth activate-service-account --key-file=sa.json
