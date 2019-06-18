@@ -7,3 +7,4 @@ cd resource-tutorial/tutorials/miscellaneous/docker-images/example-gradle
 gcloud builds submit --tag=eu.gcr.io/sre-tooling/gradle-example2 --no-cache
 gcloud container clusters get-credentials tooling --zone europe-west1-d --project sre-tooling
 kubectl apply -f deploy.yaml
+stern gradle-deployment --output=json --tail=100 | jq .
