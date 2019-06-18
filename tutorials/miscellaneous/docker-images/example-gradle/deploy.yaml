@@ -1,0 +1,44 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: gradle-deployment
+  namespace: kaniko
+spec:
+  selector:
+    matchLabels:
+      app: gradle
+  replicas: 1 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: gradle
+    spec:
+      containers:
+      - name: gradle
+        image: eu.gcr.io/sre-tooling/gradle-example2
+        ports:
+        - containerPort: 4567
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 4567
+            scheme: HTTP
+          periodSeconds: 15
+          successThreshold: 1
+          timeoutSeconds: 3
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-gradle
+  namespace: kaniko
+  labels:
+    app: gradle
+spec:
+  ports:
+  - port: 4567
+    protocol: TCP
+  selector:
+    app: gradle
+  type: NodePort

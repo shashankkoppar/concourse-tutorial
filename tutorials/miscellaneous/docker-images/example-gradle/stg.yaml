@@ -1,0 +1,62 @@
+apiVersion: voyager.appscode.com/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    ingress.appscode.com/keep-source-ip: "true"
+    ingress.appscode.com/load-balancer-ip: 35.195.253.226
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"voyager.appscode.com/v1beta1","kind":"Ingress","metadata":{"annotations":{"ingress.appscode.com/keep-source-ip":"true","ingress.appscode.com/load-balancer-ip":"35.195.253.226"},"name":"xite-website","namespace":"staging"},"spec":{"rules":[{"host":"website-staging.xite.com","http":{"paths":[{"backend":{"serviceName":"geoip-router","servicePort":80}}]}},{"host":"website-staging.xite.nl","http":{"paths":[{"backend":{"serviceName":"xite-website","servicePort":80}}]}},{"host":"website-staging.xite.be","http":{"paths":[{"backend":{"serviceName":"xite-website","servicePort":80}}]}},{"host":"website-staging.xite.tv","http":{"paths":[{"backend":{"serviceName":"xite-website","servicePort":80}}]}}],"tls":[{"hosts":["website-staging.xite.com","website-staging.xite.nl","website-staging.xite.be","website-staging.xite.tv"],"ref":{"kind":"Certificate","name":"xite-website-staging"}}]}}
+  creationTimestamp: "2018-05-16T08:49:35Z"
+  finalizers:
+  - voyager.appscode.com
+  name: xite-website
+  namespace: staging
+  resourceVersion: "87903461"
+  selfLink: /apis/voyager.appscode.com/v1beta1/namespaces/staging/ingresses/xite-website
+  uid: 0efb0671-58e6-11e8-aaf6-42010a8401c0
+spec:
+  resources: {}
+  rules:
+  - host: website-staging-freemium.xite.com
+    http:
+      paths:
+      - backend:
+          serviceName: pmt-website.staging-freemium
+          servicePort: 80
+  - host: website-staging.xite.com
+    http:
+      paths:
+      - backend:
+          serviceName: geoip-router
+          servicePort: 80
+  - host: website-staging.xite.nl
+    http:
+      paths:
+      - backend:
+          serviceName: xite-website
+          servicePort: 80
+  - host: website-staging.xite.be
+    http:
+      paths:
+      - backend:
+          serviceName: xite-website
+          servicePort: 80
+  - host: website-staging.xite.tv
+    http:
+      paths:
+      - backend:
+          serviceName: xite-website
+          servicePort: 80
+  tls:
+  - hosts:
+    - website-staging.xite.com
+    - website-staging.xite.nl
+    - website-staging.xite.be
+    - website-staging.xite.tv
+    ref:
+      kind: Certificate
+      name: xite-website-staging
+status:
+  loadBalancer:
+    ingress:
+    - ip: 35.195.253.226
