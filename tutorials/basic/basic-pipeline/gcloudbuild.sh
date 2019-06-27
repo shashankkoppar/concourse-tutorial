@@ -7,7 +7,7 @@ gcloud config set project sre-tooling
 gcloud config set builds/use_kaniko True
 cd resource-tutorial/tutorials/miscellaneous/docker-images/example-gradle
 gcloud builds submit --tag=eu.gcr.io/sre-tooling/gradle-example2 --no-cache
- gcloud components install kubectl
+gcloud components install kubectl
 gcloud container clusters get-credentials tooling --zone europe-west1-d --project sre-tooling
 CURRENT_CONTEXT=$(kubectl config current-context)
 kubernetes-deploy kaniko $CURRENT_CONTEXT --template-dir=.
