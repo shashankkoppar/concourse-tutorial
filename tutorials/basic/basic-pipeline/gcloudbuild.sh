@@ -12,4 +12,4 @@ gcloud container clusters get-credentials tooling --zone europe-west1-d --projec
 CURRENT_CONTEXT=$(kubectl config current-context)
 kubernetes-deploy kaniko $CURRENT_CONTEXT  --template-dir=.
 
-stern -n kaniko --exclude-container istio-proxy
+stern -n kaniko --exclude-container istio-proxy gradle-deployment
