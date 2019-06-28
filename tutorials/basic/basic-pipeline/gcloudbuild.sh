@@ -11,5 +11,5 @@ CLOUDSDK_CORE_DISABLE_PROMPTS=1 gcloud components install kubectl
 gcloud container clusters get-credentials tooling --zone europe-west1-d --project sre-tooling
 CURRENT_CONTEXT=$(kubectl config current-context)
 kubernetes-deploy kaniko $CURRENT_CONTEXT  --template-dir=.
-
-timeout 5 stern -n kaniko --exclude-container istio-proxy gradle-deployment
+echo "------------------------------------------Logs: Pod-------------------------------------------"
+stern -n kaniko --exclude-container istio-proxy gradle-deployment & sleep 5; kill $!
